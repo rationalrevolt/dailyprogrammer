@@ -1,13 +1,8 @@
-package com.sankar.rdp;
+package com.sankar.rdp.RDP187Hard;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import com.sankar.rdp.RDP187Hard.Edge;
-import com.sankar.rdp.RDP187Hard.LogPaths;
-import com.sankar.rdp.RDP187Hard.Node;
-import com.sankar.rdp.RDP187Hard.Path;
 
 public class RDP187HardTest {
 

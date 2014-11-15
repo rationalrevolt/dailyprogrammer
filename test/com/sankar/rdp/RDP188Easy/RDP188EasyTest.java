@@ -1,4 +1,4 @@
-package com.sankar.rdp;
+package com.sankar.rdp.RDP188Easy;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,13 +11,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.sankar.rdp.RDP188Easy.F1;
-import com.sankar.rdp.RDP188Easy.F2;
-import com.sankar.rdp.RDP188Easy.F3;
-import com.sankar.rdp.RDP188Easy.F4;
-import com.sankar.rdp.RDP188Easy.F5;
-import com.sankar.rdp.RDP188Easy.F6;
-import com.sankar.rdp.RDP188Easy.ProductionDateFixer;
+import com.sankar.rdp.RDP188Easy.DateFixers.F1;
+import com.sankar.rdp.RDP188Easy.DateFixers.F2;
+import com.sankar.rdp.RDP188Easy.DateFixers.F3;
+import com.sankar.rdp.RDP188Easy.DateFixers.F4;
+import com.sankar.rdp.RDP188Easy.DateFixers.F5;
+import com.sankar.rdp.RDP188Easy.DateFixers.F6;
 
 @RunWith(Parameterized.class)
 public class RDP188EasyTest {

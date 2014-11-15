@@ -1,72 +1,7 @@
-package com.sankar.rdp;
+package com.sankar.rdp.RDP188Easy;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-public class RDP188Easy {
-    
-    enum Month {
-        Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec;
-        
-        public String asMMString() {
-            return String.format("%2d", this.ordinal() + 1);
-        }
-    }
-    
-    static abstract class DateFixer {
-        
-        public abstract void fix(String inp, ResultHolder<String> result, DateFixerChain ch);
-        
-        protected String isoDate(String year, String month, String day) {
-            return String.format("%s-%s-%s", year, month, day);
-        }
-        
-        protected String formatYear(String year) {
-            if (year.length() == 4)
-                return year;
-            else
-                return (Integer.valueOf(year) < 50 ? "20" : "19") + year;
-        }
-        
-    }
-    
-    static interface DateFixerChain {
-        public void pass(String inp, ResultHolder<String> result);
-    }
-    
-    static class ResultHolder<T> {
-        private T value;
-        void set(T value) {this.value = value;}
-        T get() {return value;}
-    }
-    
-    static class ProductionDateFixer {
-        
-        private List<DateFixer> list = new ArrayList<>();
-        
-        public void add(DateFixer... fixers) {
-            list.addAll(Arrays.asList(fixers));
-        }
-        
-        public String fix(String inp) {
-            ResultHolder<String> dateHolder = new ResultHolder<>();
-            
-            DateFixerChain fc = new DateFixerChain() {
-                int indx;
-                
-                @Override
-                public void pass(String inp, ResultHolder<String> result) {
-                    list.get(indx++).fix(inp, result, this);
-                }
-            };
-            
-            fc.pass(inp, dateHolder);
-            
-            return dateHolder.get();
-        }
-        
-    }
+public class DateFixers {
     
     static class F1 extends DateFixer {
 
