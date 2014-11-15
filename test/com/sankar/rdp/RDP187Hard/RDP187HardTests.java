@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class Tests {
+public class RDP187HardTests {
 
     @Test
     public void test_simple_path() {

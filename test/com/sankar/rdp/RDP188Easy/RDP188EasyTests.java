@@ -19,14 +19,14 @@ import com.sankar.rdp.RDP188Easy.DateFixers.F5;
 import com.sankar.rdp.RDP188Easy.DateFixers.F6;
 
 @RunWith(Parameterized.class)
-public class Tests {
+public class RDP188EasyTests {
     
     private ProductionDateFixer fixer;
     
     private String input;
     private String expected;
     
-    public Tests(String input, String expected) {
+    public RDP188EasyTests(String input, String expected) {
         this.input = input;
         this.expected = expected;
     }
