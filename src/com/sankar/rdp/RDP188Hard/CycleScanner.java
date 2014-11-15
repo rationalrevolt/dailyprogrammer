@@ -7,6 +7,10 @@ import java.util.TreeSet;
 import com.sankar.rdp.RDP188Hard.Grid.Cell;
 
 class CycleScanner {
+    
+    static final int NOT_SCANNED = -1;
+    static final int NOT_PART_OF_ANY_CYCLE = 0;
+    
     private Grid grid;
     private int[][] cycleData;
     private Set<Cycle> cycles = new TreeSet<>();
@@ -16,7 +20,7 @@ class CycleScanner {
     private ScanProgress scanProgress = new ScanProgress() {
         @Override
         public void scanned(Cell cell, boolean partOfCycle) {
-            cycleData[cell.y()][cell.x()] = partOfCycle ? cycleId : 0;
+            cycleData[cell.y()][cell.x()] = partOfCycle ? cycleId : NOT_PART_OF_ANY_CYCLE;
         }
         public void completedCycle(Cell start, int length) {
             cycles.add(new Cycle(cycleId++, start, length));
@@ -42,7 +46,7 @@ class CycleScanner {
         
         for(int y = 0; y < grid.height(); y++)
             for(int x = 0; x < grid.width(); x++)
-                cycleData[y][x] = -1;
+                cycleData[y][x] = NOT_SCANNED;
     }
     
     void scanAllCycles() {
@@ -50,7 +54,7 @@ class CycleScanner {
         
         for(int y = 0; y < grid.height(); y++)
             for(int x = 0; x < grid.width(); x++)
-                if (cycleData[y][x] == -1) {
+                if (cycleData[y][x] == NOT_SCANNED) {
                     scan(x, y, scanProgress);
                 }
     }
@@ -60,10 +64,13 @@ class CycleScanner {
     }
     
     int scan(int x, int y, ScanProgress progress) {
-        Route route = new Route();
-        Cell start = grid.cellAt(x, y);
+        final boolean PART_OF_CYCLE = true;
+        final boolean NOT_PART_OF_CYCLE = false;
         
-        Cell cell = start;
+        Route route = new Route();
+        Cell startCell = grid.cellAt(x, y);
+        
+        Cell cell = startCell;
         while(!route.contains(cell)) {
             route.add(cell);
             cell = cell.next();
@@ -72,18 +79,20 @@ class CycleScanner {
         int cycleLength = 1;
         Cell cycleStart = cell;
         
-        cell = start;
+        cell = startCell;
+        
         while(!cell.equals(cycleStart)) {
-            progress.scanned(cell, false);
+            progress.scanned(cell, NOT_PART_OF_CYCLE);
             cell = cell.next();
         }
         
         cell = cycleStart;
-        progress.scanned(cell, true);
+        
+        progress.scanned(cell, PART_OF_CYCLE);
         while(!cell.next().equals(cycleStart)) {
-            cycleLength++;
+            cycleLength = cycleLength + 1;
             cell = cell.next();
-            progress.scanned(cell, true);
+            progress.scanned(cell, PART_OF_CYCLE);
         }
         
         progress.completedCycle(cycleStart, cycleLength);

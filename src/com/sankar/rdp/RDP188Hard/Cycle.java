@@ -38,10 +38,10 @@ class Cycle implements Comparable<Cycle> {
         
         Grid.Cell cell = cycleStart;
         
-        buff.setCharAt(cell.y()*width + cell.x(), cell.direction().code());
+        buff.setCharAt(cell.index(), cell.direction().code());
         while(!cell.next().equals(cycleStart)) {
             cell = cell.next();
-            buff.setCharAt(cell.y()*width + cell.x(), cell.direction().code());
+            buff.setCharAt(cell.index(), cell.direction().code());
         }
         
         return buff.toString();

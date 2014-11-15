@@ -55,6 +55,10 @@ class Grid {
             return y;
         }
         
+        int index() {
+            return (y * width) + x;
+        }
+        
         Grid grid() {
             return Grid.this;
         }
