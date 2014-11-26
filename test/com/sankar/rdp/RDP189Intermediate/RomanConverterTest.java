@@ -1,4 +1,4 @@
-package com.sankar.RDP189Intermediate;
+package com.sankar.rdp.RDP189Intermediate;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+
+import com.sankar.rdp.RDP189Intermediate.RomanConverter;
 
 @RunWith(Parameterized.class)
 public class RomanConverterTest {
