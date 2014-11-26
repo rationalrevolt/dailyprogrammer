@@ -20,7 +20,7 @@ public class RomanConverter {
             return value;
         }
         
-        public int valueBySubtraction() {
+        public int minimumValueBySubtraction() {
             return value() - romanToSubtract().value();
         }
         
@@ -48,7 +48,7 @@ public class RomanConverter {
         private int value;
     }
     
-    static int fromRoman(String inp) {
+    static int toDecimal(String inp) {
         return new InternalFromRoman(inp).convert();
     }
     
@@ -86,22 +86,24 @@ public class RomanConverter {
         
         while(inp > 0) {
             for(Roman r : Roman.values()) {
+                // Exact value match
                 if (inp == r.value()) {
-                    sb.append(r.name());
+                    sb.append(r);
                     inp -= r.value();
                     break;
                 }
                 
-                else if (r.value() > 1 && inp >= r.valueBySubtraction() && inp < r.value()) {
-                    sb.append(r.romanToSubtract().name()).append(r.name());
-                    inp -= r.valueBySubtraction();
+                // Check if we need to represent using subtraction
+                else if (r.value() > 1 && inp >= r.minimumValueBySubtraction() && inp < r.value()) {
+                    sb.append(r.romanToSubtract()).append(r);
+                    inp -= r.minimumValueBySubtraction();
                     break;
                 }
             
                 else {
                     int repeat = 0;
                     while(inp > r.value() && (++repeat <= r.maxRepeat())) {
-                        sb.append(r.name());
+                        sb.append(r);
                         inp -= r.value();
                     }
                     

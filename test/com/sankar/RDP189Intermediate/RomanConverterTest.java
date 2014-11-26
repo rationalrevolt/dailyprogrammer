@@ -24,12 +24,17 @@ public class RomanConverterTest {
     
     @Test public void
     converts_roman_to_decimal_correctly() {
-        assertThat(String.format("Given %s", roman), decimal, is(RomanConverter.fromRoman(roman)));
+        assertThat(String.format("Given %s", roman), decimal, is(RomanConverter.toDecimal(roman)));
     }
     
     @Test public void
     converts_decimal_to_roman_correctly() {
         assertThat(String.format("Given %d", decimal), RomanConverter.toRoman(decimal), is(roman));
+    }
+    
+    @Test public void
+    self_test_decimal_to_roman_to_decimal() {
+        assertThat(String.format("Given %d", decimal), RomanConverter.toDecimal(RomanConverter.toRoman(decimal)), is(decimal));
     }
     
     @Parameters
